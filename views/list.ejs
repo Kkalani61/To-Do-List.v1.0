@@ -1,0 +1,27 @@
+<%- include("header.html") -%>
+
+<div class="box" id="heading">
+    <h1 style="color: red"><%= listTitle %> </h1>
+</div>
+
+<div class="box">
+    <% newItem.forEach(function(item) { %>
+        <form action="/delete" method="post">
+            <div class="item">
+                <input type="checkbox" name="checkbox" value=<%= item._id %> onChange="this.form.submit()">
+                <p> <%= item.name %> </p>
+            </div>
+            <input type="hidden" name="listName" value=<%= listTitle %>> </input>
+        </form>
+    <% }) %>
+
+     <!--Passing data from(through) the server to the template
+     from app.js to list.ejs-->
+
+    <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="Add-item" autofocus autocomplete="off">
+        <button type="submit" name="list" value=<%= listTitle %>> + </button>
+    </form>
+</div>
+
+<%- include("footer.html") -%>
